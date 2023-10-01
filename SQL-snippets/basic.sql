@@ -1,3 +1,4 @@
+-- PART 1
 -- Search for repeated rows by column name
 select column_name, count(column_name)
   from table
@@ -102,3 +103,60 @@ select
   SUM(column1) OVER (PARTITION BY client ) AS sum1,
   column2
 from table1 
+
+
+
+
+
+-- PART 2
+-- Running Totals 
+SELECT id,month
+ , Amount
+ , SUM(Amount) OVER (ORDER BY id) as total_sum
+FROM bill
+
+
+-- Ranking the Data 
+SELECT 
+  id,
+  Amount,
+  RANK() OVER (ORDER BY Amount desc)
+FROM bill
+
+
+-- Adding Subtotals 
+SELECT  
+  Type,
+  id,
+  SUM (Amount) AS total_amount
+FROM bill
+GROUP BY Type,id WITH ROLLUP 
+
+
+
+-- Temporary Functions 
+-- Temporary functions allow us to modify the data 
+-- easily without writing huge case statements.
+
+CREATE TEMPORARY FUNCTION get_gender(type varchar) AS (
+   CASE WHEN type = "M" THEN "male"
+        WHEN type = "F" THEN "female"
+        ELSE "n/a"
+   END
+)
+SELECT 
+  name,
+  get_gender(Type) as gender
+FROM bill 
+
+
+
+-- Variance and Standard Deviation 
+-- The VARIANCE, VAR_POP, and VAR_SAMP are aggregate functions (group the data)
+SELECT 
+  VARIANCE(amount) AS var_amount,
+  VAR_POP(amount) AS var_pop_amount,
+  VAR_SAMP(amount) AS var_samp_amount,
+  STDDEV_SAMP(amount) as stddev_sample_amount,
+  STDDEV_POP(amount) as stddev_pop_amount,
+FROM bill 
