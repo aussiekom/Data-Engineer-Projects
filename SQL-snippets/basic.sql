@@ -42,7 +42,6 @@ from
   v$object_usage VIEW
   
   
-  
 -- Use count (1) instead of count (*)
 -- The count(*) clause considers all the columns of a table to make the calculation, 
 -- instead, the count(1) clause only takes the first column. 
