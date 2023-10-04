@@ -1,1 +1,1 @@
-## Super useful SQL Snippets
+## Useful SQL Snippets for daily data engineer tasks
