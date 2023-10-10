@@ -12,6 +12,8 @@ where owner = 'OWNER_NAME' or table_owner = 'TABLE_OWNER'
 group by TABLE_NAME
 order by TABLE_NAME;
 
+
+
 -- Show the N most expensive queries
 select 
      st.TEXT AS QueryName,          
